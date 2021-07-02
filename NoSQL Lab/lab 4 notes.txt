@@ -1,0 +1,94 @@
+use student 
+Student_Details
+db.Student_Details.insert([
+   {
+    S_Name: "Sanjay Kumar",
+    Admission_No: 14589,
+    Course_Code: "O9876",
+    Course_Name: "Oracle",
+    Start_Date:new Date("12-FEB-17"),
+    Course_Fees:13800,
+    Duration_Months:12,
+    Hostel:"Y"
+   },
+{
+    S_Name: "Gowri Shankar",
+    Admission_No: 15896,
+    Course_Code: "Js3698",
+    Course_Name: "javascript",
+    Start_Date:new Date("23-Jan-18"),
+    Course_Fees: 7950,
+    Duration_Months:10,
+    Hostel: "N"
+   },
+{
+    S_Name: "Divya Prabha",
+    Admission_No: 14836,
+    Course_Code: "C2569",
+   },
+{
+    S_Name: "Gokul Krishna",
+    Admission_No: 15865,
+    Course_Code: "L876",
+    Course_Name: "Linux",
+    Start_Date:new Date("13-Aug-17"),
+    Course_Fees: 12500,
+    Duration_Months: 10,
+    Hostel:"Y"
+   },
+{
+    S_Name: "Shree Nandhini",
+    Admission_No: 15487,
+    Course_Code: "C2569",
+    Course_Name: "C#",
+    Start_Date:new Date("30-Sep-16"),
+    Course_Fees: 9600,
+    Duration_Months: 8,
+    Hostel:"N"
+   },
+{
+    S_Name: "Umesh Yadav",
+    Admission_No: 15489,
+    Course_Code: "Dn598",
+    Course_Name: "Dotnet",
+    Start_Date:new Date("17-Apr-18"),
+    Course_Fees: 6800,
+    Duration_Months:6,
+    Hostel:"Y"
+   },
+   {
+    S_Name: "Sanjay Kumar",
+    Admission_No: 14589,
+    Course_Code: "C2569",
+    Course_Name: "C#",
+    Start_Date:new Date("12-Mar-17"),
+    Course_Fees: 9600,
+    Duration_Months:12,
+    Hostel:"Y"
+   }
+])
+
+db.Student_Details.find({Duration_Months: {$gt: 10 }},{Course_Name:1})
+
+db.Student_Details.find({"Duration_Months":{$gt:10}},{_id:0,"Course_Name":1})
+
+db.Student_Details.find({$or:[{"Course_Name":"Oracle"},{"Course_Name":"C#"}]})
+
+db.Student_Details.aggregate([{ $project: { Name_Admission: { $concat: [ "$S_Name",{$toString: "$Admission_No"}]}}}])
+
+db.Student_Details.find({$and:[{"Start_Date":{$gt:new Date("2016-12-31")}},{"Course_Name":"C#"}]},{"S_Name":1})
+
+db.Student_Details.find({$and:[{"Duration_Months":{$gt:10}},{"Course_Fees":{$lt:13000}}]},{"Course_Name":1})
+
+db.Student_Details.find({"Hostel":"Y"})
+
+db.Student_Details.find({"Hostel":"Y"},{"Course_Code":1,"Course_Name":1,"S_Name":1,"Admission_No":1})
+
+db.Student_Details.findOneAndUpdate({S_Name:"Divya Prabha"},{$set:{Course_name:"C#",Start_Date: new Date("2000-4-06"),Course_Fees: 8750,Duration_Months:9,Hostel: "Y"}})
+
+/-/ Decrement the course fee 10% for the courses have duration less than 10 monts /-/
+db.Student_Details.find({Duration_Months: {$lt: 10 }},{Course_Name:1})
+
+db.Student_Details.aggregate([{$group : {Course_Fees : {$subtract : [{"$Course_Fees"},{$multiply: ["$Course_Fees",0.01]}]}}])
+
+db.Student_Details.aggregate([{$group : {_id : null, fee_avg : {$avg : "$Course_Fees"}}}])

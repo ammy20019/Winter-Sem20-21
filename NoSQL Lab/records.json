@@ -1,0 +1,152 @@
+﻿[
+  {
+    "n": {
+"identity": 0,
+"labels": [
+        "student"
+      ],
+"properties": {
+"course_duration": 3,
+"CGPA": 7.5,
+"Stud_dept": "BCD",
+"Fees": 315000,
+"Stud_id": "17BCD7004",
+"Stud_name": "POLISETTY SAI NAGA MADHAV"
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 1,
+"labels": [
+        "student"
+      ],
+"properties": {
+"course_duration": 3,
+"CGPA": 7.6,
+"Stud_dept": "BCD",
+"Fees": 320000,
+"Stud_id": "17BCD7005",
+"Stud_name": "KUCHIPUDI NANDA PRANEETH"
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 2,
+"labels": [
+        "student"
+      ],
+"properties": {
+"course_duration": 3,
+"CGPA": 9.3,
+"Stud_dept": "BCM",
+"Fees": 330000,
+"Stud_id": "17BCM7012",
+"Stud_name": "JULURI KALYAN VARDHAN"
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 3,
+"labels": [
+        "student"
+      ],
+"properties": {
+"course_duration": 3,
+"CGPA": 7.7,
+"Stud_dept": "BEC",
+"Fees": 325000,
+"Stud_id": "17BEC7011",
+"Stud_name": "EDUPUGANTI PRABHAT"
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 4,
+"labels": [
+        "student"
+      ],
+"properties": {
+"course_duration": 3,
+"CGPA": 9.4,
+"Stud_dept": "BEC",
+"Fees": 335000,
+"Stud_id": "17BEC7014",
+"Stud_name": "TEJO VINAY POTTI"
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 5,
+"labels": [
+        "department"
+      ],
+"properties": {
+"course_duration": 3,
+"Started": 2015,
+"Dept": "CSE",
+"Strength": 240
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 6,
+"labels": [
+        "department"
+      ],
+"properties": {
+"course_duration": 3,
+"Started": 2017,
+"Dept": "MECH",
+"Strength": 180
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 7,
+"labels": [
+        "department"
+      ],
+"properties": {
+"course_duration": 3,
+"Started": 2016,
+"Dept": "ECE",
+"Strength": 240
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 8,
+"labels": [
+        "course"
+      ],
+"properties": {
+"course_duration": 3,
+"Course_name": "NoSQL",
+"Course_dept": "CCE",
+"Course_id": "CSE3009"
+      }
+    }
+  },
+  {
+    "n": {
+"identity": 9,
+"labels": [
+        "course"
+      ],
+"properties": {
+"course_duration": 3,
+"Course_name": "DBMS",
+"Course_dept": "ECE",
+"Course_id": "CSE2007"
+      }
+    }
+  }
+]

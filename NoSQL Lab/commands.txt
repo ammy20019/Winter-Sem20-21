@@ -1,0 +1,27 @@
+show dbs
+
+use Students
+
+show collections
+
+db.SD.find()
+
+db.SD.find({"Duration_Months":{$gt:10}},{_id:0,"Course_Name":1})
+
+db.SD.find({$or:[{"Course_Name":"Oracle"},{"Course_Name":"C#"}]})
+
+db.SD.aggregate([{ $project: { Name_Admission: { $concat: [ "$S_Name",{$toString: "$Admission_No"}]}}}])
+
+db.SD.find({$and:[{"Start_Date":{$gt:new Date("2016-12-31")}},{"Course_Name":"C#"}]},{"S_Name":1})
+
+db.SD.find({$and:[{"Duration_Months":{$gt:10}},{"Course_Fees":{$lt:13000}}]},{"Course_Name":1})
+
+db.SD.find({"Hostel":"Y"})
+
+db.SD.find({"Hostel":"Y"},{"Course_Code":1,"Course_Name":1,"S_Name":1,"Admission_No":1})
+
+db.SD.findOneAndUpdate({S_Name:"Divya Prabha"},{$set:{Course_name:"C#",Start_Date: new Date("2000-4-06"),Course_Fees: 8750,Duration_Months:9,Hostel: "Y"}})
+
+/-/ Decrement the course fee 10% for the courses have duration less than 10 monts /-/
+
+db.SD.aggregate([{$group : {_id : null, fee_avg : {$avg : "$Course_Fees"}}}])

@@ -1,0 +1,236 @@
+use subscribe
+db.users.insertOne(
+   {
+    name: "amy",
+    age:"23",
+    status: "A",
+    groups: ["editor","manager"]   
+   }
+   )
+
+db.users.find()
+
+
+use employee
+ db.employees.insertOne(
+...    {
+...     EMPNO: 7369,
+...     ENAME: "SMITH",
+...     JOB:"CLERK",
+...     HIREDATE:new Date("17-DEC-80"),
+...     MGR:7902,
+...     SAL:800,
+...     DEPTNO:20
+...    }
+... )
+
+
+db.employees.insert([
+   {
+    EMPNO: 7499,
+    ENAME: "ALLEN",
+    JOB:"SALESMAN",
+    HIREDATE:new Date("20-FEB-81"),
+    MGR:7698,
+    SAL:1600,
+    COMM:300,
+    DEPTNO:30
+   },
+ {
+    EMPNO: 7521,
+    ENAME: "WARD",
+    JOB:"SALESMAN",
+    HIREDATE:new Date("22-FEB-81"),
+    MGR:7698,
+    SAL:1250,
+    COMM:500,
+    DEPTNO:30
+   },
+ {
+    EMPNO: 7566,
+    ENAME: "JONES",
+    JOB:"MANAGER",
+    HIREDATE:new Date("02-APR-81"),
+    MGR:7839,
+    SAL:2975,
+    DEPTNO:20
+   },
+ {
+    EMPNO: 7654,
+    ENAME: "MARTIN",
+    JOB:"SALESMAN",
+    HIREDATE:new Date("28-SEP-81"),
+    MGR:7698,
+    SAL:1250,
+    COMM:1400,
+    DEPTNO:30
+   },
+ {
+    EMPNO: 7698,
+    ENAME: "BLAKE",
+    JOB:"MANAGER",
+    HIREDATE:new Date("01-MAY-81"),
+    MGR:7839,
+    SAL:2850,
+    DEPTNO:30
+   },
+ {
+    EMPNO: 7782,
+    ENAME: "CLARK",
+    JOB:"MANAGER",
+    HIREDATE:new Date("09-JUN-81"),
+    MGR:7839,
+    SAL:2450,
+    DEPTNO:10
+   },
+ {
+    EMPNO: 7788,
+    ENAME: "SCOTT",
+    JOB:"ANALYST",
+    HIREDATE:new Date("19-APR-87"),
+    MGR:7698,
+    SAL:3000,
+    DEPTNO:20
+   },
+ {
+    EMPNO: 7439,
+    ENAME: "KING",
+    JOB:"PRESIDENT",
+    HIREDATE:new Date("17-NOV-81"),
+    SAL:5000,
+    DEPTNO:10
+   },
+ {
+    EMPNO: 7844,
+    ENAME: "TURNER",
+    JOB:"SALESMAN",
+    HIREDATE:new Date("08-SEP-81"),
+    MGR:7698,
+    SAL:1500,
+    COMM:0,
+    DEPTNO:30
+   },
+ {
+    EMPNO: 7876,
+    ENAME: "ADAMS",
+    JOB:"CLERK",
+    HIREDATE:new Date("23-MAY-87"),
+    MGR:7288,
+    SAL:1100,
+    DEPTNO:20
+   },
+ {
+    EMPNO: 7902,
+    ENAME: "FORD",
+    JOB:"ANALYST",
+    HIREDATE:new Date("03-DEC-81"),
+    MGR:7698,
+    SAL:950,
+    DEPTNO:30
+   },
+ {
+    EMPNO: 7934,
+    ENAME: "MILLER",
+    JOB:"CLERK",
+    HIREDATE:new Date("23-JAN-82"),
+    MGR:7782,
+    SAL:1300,
+    DEPTNO:10
+   },
+]
+)
+
+
+db.employees.find()
+db.employees.find({},{"ENAME":1})
+db.employees.find({},{"ENAME":1,"JOB":1})
+db.employees.find({},{"EMPNP":1,"ENAME":1,"JOB":1,"HIREDATE":1})
+
+
+db.employees.aggregate(
+   [
+     { $sort : { ENAME : 1 } }
+   ]
+)
+
+db.employees.aggregate(
+   [
+     { $sort : { EMPNO : 1 } }
+   ]
+)
+
+db.employees.aggregate(
+   [
+     { $sort : { SAL : 1 } }
+   ]
+)
+
+db.employees.aggregate(
+   [
+     { $sort : { JOB : -1 } }
+   ]
+)
+
+db.employees.aggregate(
+   [
+     { $sort : { DEPTNO : -1 } }
+   ]
+)
+db.employees.aggregate(
+   [
+     { $sort : { ENAME : -1 } }
+   ]
+)
+
+db.employees.aggregate([ { 
+    $group: { 
+        _id: null, 
+        totalsalary: { 
+            $sum: "$SAL" 
+        } 
+    } 
+} ] )
+
+db.employees.aggregate([ { 
+    $group: { 
+        _id: null, 
+        totalsalary: { 
+            $avg: "$SAL" 
+        } 
+    } 
+} ] )
+
+
+db.employees.aggregate([ { 
+    $group: { 
+        _id: null, 
+        maxsalary: { 
+            $max: "$SAL" 
+        } 
+    } 
+} ] )
+
+
+db.employees.aggregate([ { 
+    $group: { 
+        _id: null, 
+        mainsalary: { 
+            $min: "$SAL" 
+        } 
+    } 
+} ] )
+
+db.employees.find({}).limit(3);
+db.employees.find({}).skip(3);
+
+db.employees.find({}).skip(7).limit(1);
+
+db.employees.find( { SAL: { $gt: 1500 } } )
+
+db.employees.find( { SAL: { $lt: 1200 } } )
+
+db.employees.find( { SAL: { $eq: 2450 } } )
+
+db.employees.find( { SAL: { $gt: 2500 }, JOB:"MANAGER" } )
+
+db.employees.find( { $or: [ { SAL: { $lt: 1500 } }, { JOB: "CLERK" } ] } )

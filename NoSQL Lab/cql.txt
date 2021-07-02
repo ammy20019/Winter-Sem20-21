@@ -1,0 +1,14 @@
+CREATE KEYSPACE bigcassandra with replication = {'class':'SimpleStrategy','replication_factor':3};
+
+desc keyspaces;
+drop keyspace if exists sample_demo;
+create keyspace sample_demo with replication = {'class':'SampleStrategy','replication_factor':3};
+
+desc keyspaces
+
+use sample_demo;
+drop table if exists student;
+CREATE TABLE student(id int, firstname text, lastname text, PRIMARY KEY(id)); 
+
+ALTER TABLE sample_demo.student add age int;
+desc schema

@@ -1,0 +1,75 @@
+CREATE (Madhav:student {Stud_id: "17BCD7004", Stud_name: "POLISETTY SAI NAGA MADHAV", Stud_dept: "BCD",  Fees: 315000, CGPA : 7.5}),(Praneeth:student {Stud_id: "17BCD7005", Stud_name: "KUCHIPUDI NANDA PRANEETH", Stud_dept: "BCD",  Fees: 320000, CGPA : 7.6}),(Kalyan:student {Stud_id: "17BCM7012", Stud_name: "JULURI KALYAN VARDHAN", Stud_dept: "BCM",  Fees: 330000, CGPA : 9.3}),(Prabhat:student {Stud_id: "17BEC7011", Stud_name: "EDUPUGANTI PRABHAT", Stud_dept: "BEC",  Fees: 325000, CGPA : 7.7}),(Tejo:student {Stud_id: "17BEC7014", Stud_name: "TEJO VINAY POTTI", Stud_dept: "BEC",  Fees: 335000, CGPA : 9.4})
+
+CREATE (CSE:department {Dept: "CSE", Strength: 240, Started: 2015}), (MECH:department {Dept: "MECH", Strength: 180, Started: 2017}), (ECE:department {Dept: "ECE", Strength: 240, Started: 2016})
+
+CREATE (CSE3009:course {Course_id: "CSE3009", Course_name: "NoSQL", Course_dept: "CSE"}),
+(CSE2007:course {Course_id: "CSE2007", Course_name: "DBMS", Course_dept: "ECE"})
+
+MATCH (a:student), (b:department) WHERE a.Stud_id = "17BCD7004" AND b.Dept = "CSE" 
+CREATE (a)-[r: Belongs_to {yop:2020}]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:department) WHERE a.Stud_id = "17BCD7005" AND b.Dept = "CSE" 
+CREATE (a)-[r: Belongs_to {yop:2020}]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:department) WHERE a.Stud_id = "17BEC7011" AND b.Dept = "ECE" 
+CREATE (a)-[r: Belongs_to {yop:2020}]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:department) WHERE a.Stud_id = "17BEC7014" AND b.Dept = "ECE" 
+CREATE (a)-[r: Belongs_to {yop:2019}]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:department) WHERE a.Stud_id = "17BCM7012" AND b.Dept = "MECH" 
+CREATE (a)-[r: Belongs_to {yop:2019}]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:course) WHERE a.Stud_id = "17BCD7004" AND b.Course_id = "CSE3009" 
+CREATE (a)-[r: studies]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:course) WHERE a.Stud_id = "17BCD7005" AND b.Course_id = "CSE3009" 
+CREATE (a)-[r: studies]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:course) WHERE a.Stud_id = "17BEC7011" AND b.Course_id = "CSE3009"
+CREATE (a)-[r: studies]->(b) 
+RETURN a,b
+
+
+MATCH (a:student), (b:course) WHERE a.Stud_id = "17BEC7011" AND b.Course_id = "CSE2007"
+CREATE (a)-[r: studies]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:course) WHERE a.Stud_id = "17BEC7014" AND b.Course_id = "CSE2007"
+CREATE (a)-[r: studies]->(b) 
+RETURN a,b
+
+MATCH (a:student), (b:course) WHERE a.Stud_id = "17BCM7012" AND b.Course_id = "CSE2007"
+CREATE (a)-[r: studies]->(b) 
+RETURN a,b
+
+Queries
+MATCH (a:student) RETURN a
+
+MATCH (a:student)-[:Belongs_to]-(b:department {Dept:"ECE"}) RETURN a
+
+MATCH (p:department)
+RETURN p.Dept
+
+MATCH (a:student)-[:studies]-(b:course {Course_name:"NoSQL"}) RETURN a.Stud_id
+
+MATCH (a:student {Stud_id:"17BEC7011"})-[:studies]-(b:course) RETURN b
+
+MATCH (course) SET course.course_id = 3 RETURN course
+
+MATCH (a:student)-[:Belongs_to]-(b:department {Dept:"CSE"}) 
+SET a.Fees = a.Fees+(0.1)*a.Fees
+RETURN a
+
+MATCH (a:student)-[:Belongs_to]-(b:department) WHERE b.Dept="CSE" OR b.Dept="ECE"
+RETURN a
+
+##extras MATCH (n) where id(n) = 10
+DETACH DELETE n
